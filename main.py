@@ -2,8 +2,8 @@ import pygame
 import time
 import random
 pygame.init()
-dis_width = 1000
-dis_height = 800
+dis_width = 800
+dis_height = 600
 dis = pygame.display.set_mode((dis_width,dis_height))
 pygame.display.update()
 pygame.display.set_caption("My Snake Game")
@@ -12,10 +12,10 @@ green = ((0,255,0))
 white = (255, 255, 255)
 yellow = ((255,255,0))
 black = ((0,0,0))
-snake_block = 20
+snake_block = 10
 snake_speed = 30
 clock = pygame.time.Clock()
-font_style = pygame.font.SysFont(None, 50)
+font_style = pygame.font.SysFont(None, 30)
 
 
 def message(msg,color):
@@ -61,12 +61,16 @@ def gameLoop():
                     temp_x = 0
                     temp_y = 20
             if x >= dis_width or x < 0 or y >= dis_height or y < 0:
-                game_over = True
+                game_close = True
             x+=temp_x
             y+=temp_y
             dis.fill(black)
+            pygame.draw.rect(dis, yellow, [foodx, foody, snake_block, snake_block])
             pygame.draw.rect(dis,green,[x,y,snake_block,snake_block])
             pygame.display.update()
+            # print(x,y,foodx,foody)
+            if x == foodx and y == foody:
+                print("Yummy!!")
             clock.tick(snake_speed)
     pygame.quit()
     quit()
